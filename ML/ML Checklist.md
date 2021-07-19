@@ -59,3 +59,9 @@ __Visualization__
 
 
 - [ ] Pyspark
+
+
+
+__Resources__
+
+* [Machine Learning Glossary](https://ml-cheatsheet.readthedocs.io/en/latest/index.html)

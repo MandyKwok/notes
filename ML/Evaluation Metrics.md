@@ -1,7 +1,27 @@
 # Evaluation Metrics
 
-* __Classification Accuracy__, the ratio of number of correct predictions to the total numbeer of input samples
+* <mark>**First-order Suggestions**</mark>, *classification*
+  * Predicting probabilities:
+    - Need class labels:
+      - Positive class more important: Use Precision-Recall AUC
+      - Both classes important: Use ROC AUC
+    - Need probabilities: Use Brier Score and Brier Skill Score
+  * Predicting class labels:
+    * Positive class more important:
+      * False negatives and false positives equally important: Use F1-Measure
+      * False negatives more important: Use F2-Measure
+      * False positives more important: Use F0.5-Measure
+    * Both classes important:
+      * < 80% - 90% examples for the majority class: Use Accuracy
+      * \> 80% - 90% examples for the majority class: Use G-Mean
 
+
+
+---
+
+
+
+* __Classification Accuracy__, the ratio of number of correct predictions to the total numbeer of input samples
   * <img style="float: left;" src="https://miro.medium.com/max/746/1*yRa2inzTnyASJOre93ep3g.gif" width="300"/>
   * It works well only if there are <u>equal number of samples belonging to each class</u>.
   * Given imbalance dataset: gives us the false sense of achieving high accuracy.
@@ -100,9 +120,41 @@
     * probability output: Logistic Regression, Random Forest, Gradient Boosting, Adaboost, ...
       * *Converting probability outputs to class output is just a matter of creating a threshold probability.*
 
-
-
-
+* **Texonomy of Classifier Evaluation Metrics**
+  * **Threshold Metrics**, *assume that the class distribution in the training set and the test set match*
+    *  $Accuracy = \frac{Correct\ Predictions}{Total\ Predictions}$
+    *  $Erorr = \frac{Incorrect\ Predictions}{Total\ Predictions}$
+    *  $Sensitivity = \frac{True\ Positive}{True\ Positive \ + \ False\ Negative}$
+    * $Specificity = \frac{True\ Negative}{True\ Negative \ + \ False\ Positive}$
+    * $G-Mean\ (geometric \ mean) = \sqrt{Sensitivity * Specificity}$
+    *  $Precision = \frac{True\ Positive}{True\ Positive \ + \ False\ Positive}$
+    * $Recall = \frac{True\ Positive}{True\ Positive \ + \ False\ Negative}$
+    * $F-Measure = \frac{2 \ * \ Precision \ * \ Recall}{Precision \ + \ Recall}$
+    * $Fbeta-Measure = \frac{(1 \ + \ beta^2) \ * \ Precision \ * \ Recall}{beta^2 \ * \ Precision\ + \ Recall}$
+    * Kappa, Macro-Average Accuracy, Mean-Class-Weighted Accuracy, Optimized Precision, Adjusted Geometric Mean, Balanced Accuracy, and more ...
+  * **Ranking Metrics**, *don't make assumptions about class distributions*
+    * Evaluate classifiers based on how effective they are at *separating classes*
+    * Require that a classifier predicts a score or a probability of class membership
+    * ROC (Receiver Operating Characterstic) Curve, analyzing binary classifiers based on their ability to *discriminate* classes, ROC AUC (Area Under Curve)
+      * Optimistic metric under a severe class imbalance, especially when the number of examples in the minority class is small
+      * $TruePositiveRate = \frac{TruePositive}{TruePositive + FalseNegative}$
+      * $FalsePositiveRate = \frac{FalsePositive}{FalsePositive + TrueNegative}$
+      * <img style="float: left;" src="https://machinelearningmastery.com/wp-content/uploads/2019/10/Depiction-of-a-ROC-Curve.jpg" width="400"/>
+      * Alternative: precision-recall curve, focuses on the performance of the classifier on the minority class, PR AUC = Precision-Recall Area Under Curve
+  * **Probability Metrics**, *quantify the uncertainty in a classifier's predictions*
+    * These are useful for problems where we are less interested in incorrect vs. correct class predictions and more interested in the uncertainty the model has in predictions and penalizing those predictions that are wrong but highly confident.
+    * Classifiers trained using a probabilistic framework, such as *maximum likelihood estimation*, meaning that their probabilities are already calibrated, e.g. logistic regression
+    * Classifieres not trained using a probabilistic framework, require their probabilities to be calibrated against a dataset prior to being evaluated via a probabilistic metric, e.g. SVM, KNN
+    * $log loss = -((1 – y) * log(1 – \hat{y}) + y * log(\hat{y}))$
+      * log loss for binary classification (negative log likelihood), or cross-entropy
+    * $Brier Score=1/N * sum_{i=1}^{N} (\hat{y}_{i} - y_{i})^2$, mean squared error between the expected probabilities for the positive class and the predicted probabilities
+      * The differences in Brier score for different classifiers can be very small. In order to address this problem, the score can be scaled against a reference score, such as the score from a no skill classifier
+      * $Brier Skill Score (BSS) = 1 - (Brier Score / Brier Score_{ref})$
+        * no skill = 0; worse than no skill < 0; perfect skill = 1
+* **Challenge of Evaluation Metrics**, **Imbalance Classification**
+  * All metrics make assumptions about the problem or about what is important in the problem. Therefore <mark>an evaluation metric must be chosen that best captures what you or your project stakeholders believe is important about the model or predictions.</mark>
+  * Imbalanced classification problems typically rate classification errors with the minority class as more important than those with the majority class.
+* Selecting a model, and even the data preparation methods together are a search problem that is guided by the evaluation metric.
 
 
 
@@ -118,5 +170,5 @@ __Reference__
 
 [ML Wiki - Cumulative Gain Chart](http://mlwiki.org/index.php/Cumulative_Gain_Chart)
 
-- [ ] [Tour of Evaluation Metrics for Imbalanced Classificationh](https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/)
+[Tour of Evaluation Metrics for Imbalanced Classification](https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/)
 
