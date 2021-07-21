@@ -3,9 +3,6 @@
 #### Concepts
 
 * __Activation function__
-  * References
-    * [How to choose an Activation Function for DL](https://machinelearningmastery.com/choose-an-activation-function-for-deep-learning/)
-    * [Activation Functions in NN](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
   * <mark>An activation function in a neural network defines how the weighted sum of the input is transformed into an output from a node or nodes in a layer of the network.</mark>
   * Relating to NN: All hidden layers typically use the same activation function. The output layer will typically use a different activation function from the hidden layers and is dependent upon the type of prediction required by the model.
   * Activation functions are also typically *differentiable*, meaning the first-order derivative can be calculated for a given input value. 
@@ -33,8 +30,6 @@
     * **Multilabel Classification**: One node per class, sigmoid activation.
 
 * __Vanishing Gradients__: describes the situation where a deep multilayer feed-forward network or a recurrent neural network is <mark>unable to propagate useful gradient information from the output end of the model back to the layers near the input end of the model.</mark>
-  * [How to Fix the Vanishing Gradients Problem Using the ReLU](https://machinelearningmastery.com/how-to-fix-vanishing-gradients-using-the-rectified-linear-activation-function/)
-  * [The Vanishing Gradient Problem](https://towardsdatascience.com/the-vanishing-gradient-problem-69bf08b15484)
   * The problem: As more layers using certain activation functions are added to neural networks, the gradients of the loss function approaches zero, making the network hard to train.
   * Why: Certain activation functions, like the sigmoid function, squishes a large input space into a small input space between 0 and 1. Therefore, a large change in the input of the sigmoid function will cause a small change in the output. Hence, the derivative becomes small.
     * <img style="float: left;" src="https://miro.medium.com/max/2000/1*6A3A_rt4YmumHusvTvVTxw.png" width="500"/>
@@ -51,12 +46,10 @@
 * __Backward-propagation__
 
   * Gradients of neural networks are found using backpropagation. 
-
   * Simply put, <mark>backpropagation finds the derivatives of the network by moving layer by layer from the final layer to the initial one. </mark>
-
   * By the *chain rule*, the derivatives of each layer are multiplied down the network (from the final layer to the initial) to compute the derivatives of the initial layers.
 
-    
+  
 
 #### Model Structure
 
@@ -75,6 +68,20 @@
 
 
 
+__Reference__
+
+* Activation Function
+  * [How to choose an Activation Function for DL](https://machinelearningmastery.com/choose-an-activation-function-for-deep-learning/)
+  * [Activation Functions in NN](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
+* Vanishing Gradients
+
+  * [How to Fix the Vanishing Gradients Problem Using the ReLU](https://machinelearningmastery.com/how-to-fix-vanishing-gradients-using-the-rectified-linear-activation-function/)
+  * [The Vanishing Gradient Problem](https://towardsdatascience.com/the-vanishing-gradient-problem-69bf08b15484)
+* Batch Normalization
+  * [A Gentle Introduction to Batch Normalization for Deep NN](https://machinelearningmastery.com/batch-normalization-for-training-of-deep-neural-networks/)
+* Dropout
+  * [A Gentle Introduction to Dropout for Regularizing Deep NN](https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/)
+
 
 
 
@@ -83,11 +90,21 @@
 
 - [ ] weight initialisation
 - [ ] Multi-layer Perceptron, [link](https://scikit-learn.org/stable/modules/neural_networks_supervised.html)
-- [ ] SGD
+- [ ] SGD, Momentum, Adam, and other optimizers
 - [ ] backward-propagation
-- [ ] CNN, RNN
+- [ ] learning rate
+- [ ] Convolutions 
+- [ ] RNN
+- [ ] batch normalization
+- [ ] dropout
+- [ ] data augmentation
+- [ ] weight decay
+- [ ] Image classification and regression
+- [ ] Entity and word embeddings
 - [ ] NLP specific: LSTM, transformer, ...
+- [ ] Segmentation
 - [ ] model interpretation
+- [ ] transfer learning
 
 
 
